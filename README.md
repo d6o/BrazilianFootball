@@ -1,4 +1,4 @@
-# ![BrazilianFootball](http://image.prntscr.com/image/5b8a0445a0ce4360980cb03a819705bd.png)
+![BrazilianFootball](http://image.prntscr.com/image/5b8a0445a0ce4360980cb03a819705bd.png)
 
 # BrazilianFootball ![Language Badge](https://img.shields.io/badge/Language-Go-blue.svg) ![Go Report](https://goreportcard.com/badge/github.com/DiSiqueira/BrazilianFootball) ![License Badge](https://img.shields.io/badge/License-MIT-blue.svg) ![Status Badge](https://img.shields.io/badge/Status-Beta-brightgreen.svg)
 
@@ -21,7 +21,7 @@ Display data about Brazilian football games that will occur in the next few days
 
 ## Demo
 
-[![asciicast](http://image.prntscr.com/image/2f33d4153f794d15bd95d2d533adab98.png)](https://asciinema.org/a/107878?t=10)
+[![asciicast](https://asciinema.org/a/a0m1ln1k1u2ibbh1n4mbty1do.png)](https://asciinema.org/a/a0m1ln1k1u2ibbh1n4mbty1do)
 
 ## Project Status
 
@@ -34,10 +34,11 @@ BrazilianFootball is on beta. Pull Requests [are welcome](https://github.com/DiS
 - Always up-to-date
 - Use decimal type
 - 100% satisfaction guaranteed
-- It's perfect to convert amounts between currencies
+- It's perfect to keep up-to-date with all football matches
 - STUPIDLY [EASY TO USE](https://github.com/DiSiqueira/BrazilianFootball#usage)
 - Very fast start up and response time
 - Uses native libs
+- Colorful
 
 ## Installation
 
@@ -47,212 +48,95 @@ BrazilianFootball is on beta. Pull Requests [are welcome](https://github.com/DiS
 $ go get github.com/disiqueira/BrazilianFootball
 ```
 
-## Available Currencies
-
-- ATS Austria, shilling
-- AUD Australian, dollar
-- BEF Belgien, franc
-- BRL Brazilien, real
-- CAD Canada, dollar
-- CHF Switzerland, francs
-- CNY China, yuan renminbi
-- CYP Cyprus, pound
-- CZK Czech Republic, koruna
-- DEM Germany, mark
-- DKK Denmark, krone
-- EEK Estonian, kroon
-- ESP Spain, pesetas
-- EUR Euroland, euro
-- FIM Finland, marka
-- FRF France, franc
-- GBP Great Britain, pound
-- GRD Greece, drachmer
-- HKD Hong Kong, dollar
-- HUF Hungary, forint
-- IDR Indonesia, rupiah
-- IEP Ireland, pund
-- INR India, rupee
-- ISK Iceland, kronor
-- ITL Italy, lire
-- JPY Japan, yen
-- KRW South Korea, won
-- KWD Kuwait, dinar
-- LTL Lithuania,  litas
-- LVL Latvia, lat
-- MAD Morocko, dirham
-- MXN Mexico, nuevo peso
-- MYR Malaysia, ringgit
-- NLG Dutchland, guilder
-- NOK Norway, krone
-- NZD New Zealand, dollar
-- PLN Poland, zloty
-- PTE Portugal, escudo
-- RUB Russia, rouble
-- SAR Saudi Arabia, riyal
-- SEK Sweden, kronor
-- SGD Singapore, dollar
-- SIT Slovenia, tolar
-- SKK Slovakia, koruna
-- THB Thailand, baht
-- TRL Turkey, lira
-- TRY Turkey, new lira
-- USD US, dollar
-- ZAR South Africa, rand
-
 ## Usage
 
-### Get all available currencies
+### Get 5 matches
 
-```golang
-package main
-
-import (
-	"fmt"
-
-	"github.com/disiqueira/BrazilianFootball"
-)
-
-func main() {
-	curList, _ := BrazilianFootball.AvailableCurrencies()
-
-	for _, currency := range curList {
-		fmt.Println(currency.Description)
-	}
-}
+```bash
+$ BrazilianFootball
 ```
 
-Output:
-```
-SEK Sweden, kronor
-ATS Austria, shilling
-AUD Australian, dollar
-BEF Belgien, franc
-BRL Brazilien, real
-CAD Canada, dollar
-CHF Switzerland, francs
-CNY China, yuan renminbi
-CYP Cyprus, pound
-CZK Czech Republic, koruna
-DEM Germany, mark
-DKK Denmark, krone
-EEK Estonian, kroon
-ESP Spain, pesetas
-EUR Euroland, euro
-FIM Finland, marka
-FRF France, franc
-GBP Great Britain, pound
-GRD Greece, drachmer
-HKD Hong Kong, dollar
-HUF Hungary, forint
-IDR Indonesia, rupiah
-IEP Ireland, pund
-INR India, rupee
-ISK Iceland, kronor
-ITL Italy, lire
-JPY Japan, yen
-KRW South Korea, won
-KWD Kuwait, dinar
-LTL Lithuania,  litas
-LVL Latvia, lat
-MAD Morocko, dirham
-MXN Mexico, nuevo peso
-MYR Malaysia, ringgit
-NLG Dutchland, guilder
-NOK Norway, krone
-NZD New Zealand, dollar
-PLN Poland, zloty
-PTE Portugal, escudo
-RUB Russia, rouble
-SAR Saudi Arabia, riyal
-SGD Singapore, dollar
-SIT Slovenia, tolar
-SKK Slovakia, koruna
-THB Thailand, baht
-TRL Turkey, lira
-TRY Turkey, new lira
-USD US, dollar
-ZAR South Africa, rand
+### Get 10 matches
+
+```bash
+$ BrazilianFootball -limit=10
 ```
 
-### Convert 100 USD to all currencies
+### Filter by Team
 
-```golang
-package main
-
-import (
-	"fmt"
-        "strconv"
-
-	"github.com/disiqueira/BrazilianFootball"
-	"github.com/shopspring/decimal"
-)
-
-func main() {
-	curList, _ := BrazilianFootball.AvailableCurrencies()
-
-	dollar := BrazilianFootball.NewCurrency("USD")
-        amount := decimal.NewFromFloat(100.00)
-
-	for _, currency := range curList {
-		conv, _ := BrazilianFootball.ConvertCurrency(dollar, currency, amount)
-
-		fmt.Printf("%-3s %-8s --> %-3s %s\n", dollar.ID, amount, currency.ID, conv)
-	}
-}
+```bash
+$ BrazilianFootball -team="Corinthians"
 ```
 
-Output:
+### Filter by Championship
+
+```bash
+$ BrazilianFootball -championship="Campeonato Paulista"
 ```
-USD 100.00 --> SEK 881.12
-USD 100.00 --> ATS 1334.36
-USD 100.00 --> AUD 130.28
-USD 100.00 --> BEF 3911.85
-USD 100.00 --> BRL 312.07
-USD 100.00 --> CAD 133.35
-USD 100.00 --> CHF 99.59
-USD 100.00 --> CNY 690.75
-USD 100.00 --> CYP 54.42
-USD 100.00 --> CZK 2509.74
-USD 100.00 --> DEM 189.66
-USD 100.00 --> DKK 690.54
-USD 100.00 --> EEK 1531.05
-USD 100.00 --> ESP 16134.77
-USD 100.00 --> EUR 92.88
-USD 100.00 --> FIM 576.57
-USD 100.00 --> FRF 636.10
-USD 100.00 --> GBP 80.95
-USD 100.00 --> GRD 33042.83
-USD 100.00 --> HKD 776.45
-USD 100.00 --> HUF 28765.63
-USD 100.00 --> IDR 1333010.59
-USD 100.00 --> IEP 76.37
-USD 100.00 --> INR 6553.27
-USD 100.00 --> ISK 10876.95
-USD 100.00 --> ITL 187751.97
-USD 100.00 --> JPY 11334.92
-USD 100.00 --> KRW 113239.94
-USD 100.00 --> KWD 37.74
-USD 100.00 --> LTL 319.77
-USD 100.00 --> LVL 69.22
-USD 100.00 --> MAD 999.46
-USD 100.00 --> MXN 1924.26
-USD 100.00 --> MYR 489.51
-USD 100.00 --> NLG 213.70
-USD 100.00 --> NOK 848.16
-USD 100.00 --> NZD 143.12
-USD 100.00 --> PLN 399.87
-USD 100.00 --> PTE 19441.33
-USD 100.00 --> RUB 5790.71
-USD 100.00 --> SAR 375.02
-USD 100.00 --> SGD 140.29
-USD 100.00 --> SIT 23310.05
-USD 100.00 --> SKK 0.00
-USD 100.00 --> THB 3490.97
-USD 100.00 --> TRL 176224000.00
-USD 100.00 --> TRY 360.64
-USD 100.00 --> USD 100.00
-USD 100.00 --> ZAR 1277.17
+
+### Filter by Date
+
+```bash
+$ BrazilianFootball -date="02/04/2017"
 ```
+
+### Filter by Hour
+
+```bash
+$ BrazilianFootball -hour="10:00"
+```
+
+### Filter by Date and Hour
+```bash
+$ BrazilianFootball -date="02/04/2017" -hour="10:00"
+```
+
+### Filter by Filter by Day of week
+
+```bash
+$ BrazilianFootball -dayOfWeek="Dom"
+```
+
+### Filter by Location
+
+```bash
+$ BrazilianFootball -location="Arena Joinville"
+```
+
+### Filter by Round phase
+
+```bash
+$ BrazilianFootball -phase="6ª rodada"
+```
+
+### Filter by Status
+
+```bash
+$ BrazilianFootball -status="Encerrada"
+```
+
+### Show only today matches
+
+```bash
+$ BrazilianFootball -today=true
+```
+
+### Hide Finished matches
+
+```bash
+$ BrazilianFootball -upcoming=true
+```
+
+### Show Help
+
+```bash
+# Show help
+$ BrazilianFootball -h
+```
+
+## Program help
+
+![ProgramHelp](http://image.prntscr.com/image/fe46f19329144f67afa0f81ceb7f8dc5.png)
 
 ## Contributing
 
@@ -273,7 +157,7 @@ $ go get -v -d
 ## Social Coding
 
 1. Create an issue to discuss about your idea
-2. [Fork it] (https://github.com/DiSiqueira/BrazilianFootball/fork)
+2. [Fork it](https://github.com/DiSiqueira/BrazilianFootball/fork)
 3. Create your feature branch (`git checkout -b my-new-feature`)
 4. Commit your changes (`git commit -am 'Add some feature'`)
 5. Push to the branch (`git push origin my-new-feature`)
